@@ -6,6 +6,7 @@ let ai = 'O';//token2
 let human = 'X';//token1
 let player = human;
 let doublePlayer = false;
+let gameOver = false;
 var click = new Audio("http://soundbible.com/grab.php?id=1705&type=mp3");
 let current_player = human;
 window.onload = () =>{     
@@ -25,6 +26,7 @@ const clearBoard=()=>{
     initBoard();     
 }
 const turn=(i)=>{
+if(!gameOver){
 if(doublePlayer){    
     let check = clas("td"); 
     check[i].value= current_player;
@@ -32,8 +34,22 @@ if(doublePlayer){
     check[i].disabled = true;
     fillBoard();
     if(checkWinner()){
-       console.log(checkWinner());
-       clearBoard();
+       if(checkWinner()==-1){
+           show_result("Player 1 Won");
+           gameOver =true;
+           clearBoard();
+       }
+       else if(checkWinner() == 1){
+           show_result("Player 2 Won");
+           gameOver =true;
+           clearBoard();
+       }
+       else{
+           show_result("Match is Tie");
+           gameOver =true;
+           clearBoard();
+       }
+       
     }
 current_player=(current_player==human)?ai:human;
 }else{
@@ -44,17 +60,48 @@ current_player=(current_player==human)?ai:human;
     fillBoard();
     var result = checkWinner();    
 if(result){     
-        initBoard();
+        if(checkWinner()==-1){
+           show_result("You Won");
+           gameOver =true;
+           clearBoard();
+       }
+       else if(checkWinner() == 1){
+           show_result("Computer Won");
+           gameOver =true;
+           clearBoard();
+       }
+       else{
+           show_result("Match is Tie");
+           gameOver =true;
+           clearBoard();
+       }
+       
 }else{         
         check[aimove()].value = ai;
         check[aimove()].innerText=ai;         
         check[aimove()].disabled = true;            
         fillBoard();
            if(checkWinner()){
-             clearBoard(); 
+             if(checkWinner()==-1){
+           show_result("You Won");
+           gameOver =true;
+           clearBoard();
+       }
+       else if(checkWinner() == 1){
+           show_result("Computer Won");
+           gameOver =true;
+           clearBoard();           
+       }
+       else{
+           show_result("Match is Tie");
+           gameOver =true;
+           clearBoard();
+       }
+        
            }        
        }
-    }   
+    } 
+  }  
 }
 const fillBoard=()=>{
 for(let i =0;i<clas("td").length;i++)board[i] = clas("td")[i].value;
@@ -175,5 +222,17 @@ const backMainPage=()=>{
     mainPage.style.display ="block";
     header_close_icon.style.display ="none";    
     info.innerText="Tic Tac Toe";
+}
+
+
+const show_result=(e)=>{
+    data.innerText=e;
+    result.style.visibility = "visible";
+    result.style.left ="50%";
+}
+const hide_result=()=>{
+    result.style.left ="-50%";
+    result.style.visibility = "hidden";
+    gameOver =false;
 } 
  
