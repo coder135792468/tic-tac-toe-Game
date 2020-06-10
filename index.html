@@ -22,8 +22,8 @@ If anybody have any doubt regarding minimax algorithm then ask me
  
      <meta name = "viewport" content = "width=device-width, initial-scale=1.0">  
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>              
-          <style>
-*{
+       <style>
+           *{
     margin:0;
     padding:0;
 }
@@ -192,6 +192,7 @@ body {
     background:#ececec;
     border-radius:4px;
     font-weight:bold;  
+    z-index:99999;
     position:absolute; 
     bottom:5px; 
     box-shadow:6px 6px 12px rgba(0,0,0,0.1), 
@@ -211,9 +212,57 @@ body {
 
 
 
+#result{
+    position:absolute;    
+    background:#ececec;
+    width:90%;height:auto;
+    padding:20px 10px;
+    box-shadow:6px 6px 12px rgba(0,0,0,0.1), 
+        -6px -6px 12px rgba(255,255,255,0.8);
+    -webkit-box-shadow:6px 6px 12px rgba(0,0,0,0.1), 
+        -6px -6px 12px rgba(255,255,255,0.8);
+    -moz-box-shadow:6px 6px 12px rgba(0,0,0,0.1), 
+        -6px -6px 12px rgba(255,255,255,0.8);
+    -ms-box-shadow:6px 6px 12px rgba(0,0,0,0.1), 
+        -6px -6px 12px rgba(255,255,255,0.8);
+    border-radius:10px;
+    top:50%;left:-50%;
+    transform:translate(-50%,-50%);
+    visibility:hidden;
+    transition:0.5s;
+}
+#result p{
+    font-weight:600;
+    font-size:25px;
+    text-align:center;
+}
+#result button{
+   outline:none;border:none;
+   padding:10px 50px;float:right;
+   font-weight:600;background:#ececec;
+   box-shadow:6px 6px 12px rgba(0,0,0,0.1), 
+        -6px -6px 12px rgba(255,255,255,0.8);
+    -webkit-box-shadow:6px 6px 12px rgba(0,0,0,0.1), 
+        -6px -6px 12px rgba(255,255,255,0.8);
+    -moz-box-shadow:6px 6px 12px rgba(0,0,0,0.1), 
+        -6px -6px 12px rgba(255,255,255,0.8);
+    -ms-box-shadow:6px 6px 12px rgba(0,0,0,0.1), 
+        -6px -6px 12px rgba(255,255,255,0.8);
+   
+}
+#result button:hover{
+    box-shadow:inset 6px 6px 12px rgba(0,0,0,0.1), 
+       inset -6px -6px 12px rgba(255,255,255,0.8);
+    -webkit-box-shadow:inset 6px 6px 12px rgba(0,0,0,0.1), 
+       inset -6px -6px 12px rgba(255,255,255,0.8);
+    -moz-box-shadow:6px 6px 12px rgba(0,0,0,0.1), 
+       inset -6px -6px 12px rgba(255,255,255,0.8);
+    -ms-box-shadow:inset 6px 6px 12px rgba(0,0,0,0.1), 
+       inset -6px -6px 12px rgba(255,255,255,0.8);
+}
 
 
-         </style>
+       </style>               
         </head>
         <body> 
   <div class="header">
@@ -251,7 +300,12 @@ body {
    </div>
  </div> 
    
-                        
-       <script src="script.js"></script>                    
+  
+  
+<div id="result">
+            <p id="data">Match Is Tie</p>
+            <button onclick="hide_result()">Ok</button>
+        </div>                       
+                           
         </body>
     </html>
